@@ -1,0 +1,210 @@
+---
+title: "GBIF Observations For CT Bioblitz 2016 "
+author: "James Mickley"
+output:
+  html_document:
+    keep_md: yes
+    theme: readable
+  pdf_document:
+    keep_tex: no
+    latex_engine: xelatex
+graphics: yes
+---
+
+
+```{r 'Setup', include=F}
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+# @@@@@ Knitr Options
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+# Set default knitr options: 
+# Suppress warnings and messages, cache chunks, 
+#  set default figure size to 6x8 at 300 dpi, and save a png and pdf
+knitr::opts_chunk$set(warning = F, message = F, collapse = T, cache = T,
+    fig.height = 6, fig.width = 8, dpi = 300, # 6x8" @ 300dpi:1800x2400=4.3MP
+    dev = c('png', 'pdf'), dev.args = list(pdf = list(onefile = F)))
+
+```
+
+## Historical Species Records in Hartford
+
+I downloaded all of the observations on GBIF in the area of our bioblitz and took a quick look at the data last night.  This may give a starting point to look for rare species, species that haven't been seen in a while, and under-sampled groups.
+
+The original dataset is is available from GBIF [here](http://doi.org/10.15468/dl.vptagl), but has been run through [OpenRefine](http://openrefine.org/) using [these steps](openrefine-data-cleaning-steps.json) to clean it up a bit. 
+
+Then, the distance from Two Rivers Middle School was calculated using the [haversine formula](http://andrew.hedges.name/experiments/haversine/).  
+
+The data includes some of Yale's collections, research-grade iNaturalist observations and some of UConn's collections.  A large portion of the observations are from eBird. 
+
+I included all complete observations within a 5 mile radius, and then tallied up the number of observations for each species.  The entire dataset of all 63,000 observations is available [here](5-mile-radius-cleaned.csv.zip).
+
+A more useful dataset is a list of species (1,575 total), with the number of observations summarized, and the location and coordinates of the most recent observation for that species.  That dataset is available [here](species-list.csv)
+
+Finally, I [subset the list of species](no-obs-in-50yr.csv) to only include those that hadn't been recorded in the last 50 years in this area.  That still left 928 species.  
+
+
+If you'd like to play with this yourself, feel free to download the data.  You can also download this folder and run the [R code](Historic Species.RMD).
+
+
+```{r 'Data_wrangling', include=F}
+
+# Center point: 
+# 41.756886, -72.6543005
+
+# Load required R libraries
+library(cowplot) # Needed for publication-quality plots
+library(dplyr) # Needed for data wrangling, load last to avoid conflicts
+
+# Read in gbif data within 5 miles of Three Rivers
+gbif <- read.csv(unz("gbif-5mi-radius.csv.zip", "gbif-5mi-radius.csv"))
+
+# Take a look at the structure of the dataset
+str(gbif)
+names(gbif)
+
+
+
+# Clean up the data a bit
+gbif <- gbif %>%
+     
+     # Set month and day to Jan 1st, if not specified
+     mutate(month = ifelse(is.na(month), 1, month), 
+            day = ifelse(is.na(day), 1, day)) %>%
+
+     # Create a date column
+     mutate(date = as.Date(paste(year, month, day, sep="-"))) %>%
+     
+     # Rename species with infraspecific info
+     mutate(species = factor(ifelse(infraspecies == "", as.character(species),
+          paste(species, " ", taxonrank, ". ", infraspecies, sep="")))) %>%
+     
+     # Summarize the number of observations for each species
+     group_by(species) %>%
+     mutate(num.obs = n()) %>%
+     ungroup
+
+# Write out the cleaned dataset to CSV
+write.csv(gbif, "5-mile-radius-cleaned.csv")
+
+# Zip up the resulting large CSV file
+zip("5-mile-radius-cleaned.csv.zip", "5-mile-radius-cleaned.csv")
+
+# Delete the unzipped file
+file.remove("5-mile-radius-cleaned.csv")
+
+
+
+# Summarize by species, and sort by num.obs ascending
+species <- gbif %>%
+     
+     # Arrange by date descending, and then keep the most recent record
+     arrange(desc(date)) %>%
+     distinct(species) %>%
+     
+     # Arrange by the rarest species first, and then the oldest observations
+     arrange(num.obs, year) %>%
+     
+     # Select a subset of columns
+     select(phylum, class, family, species, date, year, lat, lon, locality, num.obs)
+
+# Write out the species list to a CSV file
+write.csv(species, "species-list.csv")
+
+
+
+# Find all the species that haven't been seen in 50 years
+oldspp <- species %>%
+     
+     # Filter out dates with a year less than 1966
+     filter(format(date,'%Y') < 1966) %>%
+     
+     # Put the historically most-observed species first
+     arrange(desc(num.obs))
+
+# Write out the species that haven't been seen lately to CSV file
+write.csv(oldspp, "no-obs-in-50yr.csv")
+
+
+
+```
+
+## Some Quick Graphs
+
+This graph shows the number of observations for each species by taxonomic Class.  It looks like only plants and birds are fairly well-sampled, though this misses UConn's insect collection I think.  
+
+```{r 'Num-observ', echo = F}
+
+
+# Filter out species that don't have class specified
+species %>% filter(class != "") %>%
+     
+# Set up x and y for ggplot
+ggplot(aes(x = class, y = num.obs)) +
+     
+     # Add points for each species
+     geom_jitter(alpha = 0.5, color = "tomato") +
+     
+     # Add transparent boxplot
+     geom_boxplot(alpha = 0) + 
+     
+     # Make the y-axis on a log scale, with the following tickmarks
+     scale_y_log10(breaks = c(1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000)) + 
+     
+     # Add axis labels
+     ylab("Number of Observations") + xlab("Class") + 
+     
+     # Black and white theme
+     theme_bw() + 
+     
+     # Custom theming of the axis labels
+     theme(axis.text.x = element_text(size = 16, angle = -45, hjust = 0),
+          axis.text.y = element_text(size = 16),
+          axis.title.x = element_text(size = 18, face = "bold"),
+          axis.title.y = element_text(size = 18, face = "bold", vjust = 1.5))
+
+
+
+```
+
+And here's a distribution by class of the year where a species was last seen.  It looks like there are a lot of plant species in particular that have not been seen in a long time.  
+
+```{r 'Year-dist', echo = F}
+
+# Filter out species that don't have class specified
+species %>% filter(class != "") %>%
+
+# Make a column for the year last seen
+mutate(last_yr = as.numeric(format(date,'%Y'))) %>%
+     
+# Set up x and y for ggplot
+ggplot(aes(x = class, y = last_yr)) +
+     
+     # Add points for each species
+     geom_jitter(alpha = 0.5, color = "tomato") +
+     
+     # Add transparent boxplot
+     geom_boxplot(alpha = 0) + 
+     
+     # Add axis labels
+     ylab("Last Observed (year)") + xlab("Class") + 
+     
+     # Black and white theme
+     theme_bw() + 
+     
+     # Custom theming of the axis labels
+     theme(axis.text.x = element_text(size = 16, angle = -45, hjust = 0), 
+          axis.title.x = element_text(size = 18, face = "bold"),
+          axis.text.y = element_text(size = 16),
+          axis.title.y = element_text(size = 18, face = "bold", vjust = 1.5))
+
+
+
+```
+
+
+### R Session Information (for posterity)
+
+```{r 'Session_Info', echo=F, comment=""}
+
+# Add session information to help with reproduceability
+sessionInfo()

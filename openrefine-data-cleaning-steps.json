@@ -1,0 +1,1378 @@
+[
+  {
+    "op": "core/column-reorder",
+    "description": "Reorder columns",
+    "columnNames": [
+      "gbifid",
+      "phylum",
+      "kingdom",
+      "class",
+      "order",
+      "family",
+      "species",
+      "taxonrank",
+      "infraspecificepithet",
+      "locality",
+      "decimallatitude",
+      "decimallongitude",
+      "day",
+      "month",
+      "year",
+      "taxonkey",
+      "specieskey",
+      "basisofrecord",
+      "institutioncode",
+      "collectioncode",
+      "catalognumber",
+      "recordnumber",
+      "recordedby"
+    ]
+  },
+  {
+    "op": "core/row-removal",
+    "description": "Remove rows",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": [
+        {
+          "omitError": false,
+          "expression": "value",
+          "selectBlank": true,
+          "selection": [
+            {
+              "v": {
+                "v": "ORDER",
+                "l": "ORDER"
+              }
+            },
+            {
+              "v": {
+                "v": "GENUS",
+                "l": "GENUS"
+              }
+            },
+            {
+              "v": {
+                "v": "KINGDOM",
+                "l": "KINGDOM"
+              }
+            },
+            {
+              "v": {
+                "v": "FAMILY",
+                "l": "FAMILY"
+              }
+            }
+          ],
+          "selectError": false,
+          "invert": false,
+          "name": "taxonrank",
+          "omitBlank": false,
+          "type": "list",
+          "columnName": "taxonrank"
+        }
+      ]
+    }
+  },
+  {
+    "op": "core/column-reorder",
+    "description": "Reorder columns",
+    "columnNames": [
+      "gbifid",
+      "phylum",
+      "class",
+      "order",
+      "family",
+      "species",
+      "taxonrank",
+      "infraspecificepithet",
+      "locality",
+      "decimallatitude",
+      "decimallongitude",
+      "day",
+      "month",
+      "year",
+      "taxonkey",
+      "specieskey",
+      "basisofrecord",
+      "institutioncode",
+      "collectioncode",
+      "catalognumber",
+      "recordnumber",
+      "recordedby"
+    ]
+  },
+  {
+    "op": "core/column-rename",
+    "description": "Rename column basisofrecord to type",
+    "oldColumnName": "basisofrecord",
+    "newColumnName": "type"
+  },
+  {
+    "op": "core/column-rename",
+    "description": "Rename column decimallongitude to lon",
+    "oldColumnName": "decimallongitude",
+    "newColumnName": "lon"
+  },
+  {
+    "op": "core/column-rename",
+    "description": "Rename column decimallatitude to lat",
+    "oldColumnName": "decimallatitude",
+    "newColumnName": "lat"
+  },
+  {
+    "op": "core/column-rename",
+    "description": "Rename column infraspecificepithet to infraspecies",
+    "oldColumnName": "infraspecificepithet",
+    "newColumnName": "infraspecies"
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column taxonrank",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "taxonrank",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "FORM"
+        ],
+        "to": "f"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column taxonrank",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "taxonrank",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "SPECIES"
+        ],
+        "to": ""
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column taxonrank",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "taxonrank",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "VARIETY"
+        ],
+        "to": "v"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column taxonrank",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "taxonrank",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "SUBSPECIES"
+        ],
+        "to": "ssp"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column type",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "type",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "UNKNOWN"
+        ],
+        "to": "NA"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column type",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "type",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "OBSERVATION"
+        ],
+        "to": "obs"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column type",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "type",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "PRESERVED_SPECIMEN"
+        ],
+        "to": "pr.sp"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column type",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "type",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "MATERIAL_SAMPLE"
+        ],
+        "to": "pr.sp"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column type",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "type",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "HUMAN_OBSERVATION"
+        ],
+        "to": "obs"
+      }
+    ]
+  },
+  {
+    "op": "core/row-removal",
+    "description": "Remove rows",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": [
+        {
+          "omitError": false,
+          "expression": "value",
+          "selectBlank": false,
+          "selection": [
+            {
+              "v": {
+                "v": "FOSSIL_SPECIMEN",
+                "l": "FOSSIL_SPECIMEN"
+              }
+            }
+          ],
+          "selectError": false,
+          "invert": false,
+          "name": "type",
+          "omitBlank": false,
+          "type": "list",
+          "columnName": "type"
+        }
+      ]
+    }
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column lat using expression value.toNumber()",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "lat",
+    "expression": "value.toNumber()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column lon using expression value.toNumber()",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "lon",
+    "expression": "value.toNumber()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column dlat at index 22 based on column recordedby using expression grel:radians(cells[\"lat\"].value - 41.756886)",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "newColumnName": "dlat",
+    "columnInsertIndex": 22,
+    "baseColumnName": "recordedby",
+    "expression": "grel:radians(cells[\"lat\"].value - 41.756886)",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column dlon at index 23 based on column dlat using expression grel:radians(cells[\"lon\"].value - -72.6543005)",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "newColumnName": "dlon",
+    "columnInsertIndex": 23,
+    "baseColumnName": "dlat",
+    "expression": "grel:radians(cells[\"lon\"].value - -72.6543005)",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column a at index 24 based on column dlon using expression grel:pow(sin(cells[\"dlat\"].value/2),2) + cos(radians(41.756886)) * cos(radians(cells[\"lat\"].value)) * pow(sin(cells[\"dlon\"].value/2),2)",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "newColumnName": "a",
+    "columnInsertIndex": 24,
+    "baseColumnName": "dlon",
+    "expression": "grel:pow(sin(cells[\"dlat\"].value/2),2) + cos(radians(41.756886)) * cos(radians(cells[\"lat\"].value)) * pow(sin(cells[\"dlon\"].value/2),2)",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column c at index 25 based on column a using expression grel:2 * atan2(pow(value, 0.5), pow(1 - value, 0.5))",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "newColumnName": "c",
+    "columnInsertIndex": 25,
+    "baseColumnName": "a",
+    "expression": "grel:2 * atan2(pow(value, 0.5), pow(1 - value, 0.5))",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column distance at index 26 based on column c using expression grel:3961 * value",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "newColumnName": "distance",
+    "columnInsertIndex": 26,
+    "baseColumnName": "c",
+    "expression": "grel:3961 * value",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/column-reorder",
+    "description": "Reorder columns",
+    "columnNames": [
+      "gbifid",
+      "phylum",
+      "class",
+      "order",
+      "family",
+      "species",
+      "taxonrank",
+      "infraspecies",
+      "locality",
+      "lat",
+      "lon",
+      "day",
+      "month",
+      "year",
+      "taxonkey",
+      "specieskey",
+      "type",
+      "institutioncode",
+      "collectioncode",
+      "catalognumber",
+      "recordnumber",
+      "recordedby",
+      "distance"
+    ]
+  },
+  {
+    "op": "core/row-removal",
+    "description": "Remove rows",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": [
+        {
+          "omitError": false,
+          "expression": "isBlank(value)",
+          "selectBlank": false,
+          "selection": [
+            {
+              "v": {
+                "v": true,
+                "l": "true"
+              }
+            }
+          ],
+          "selectError": false,
+          "invert": false,
+          "name": "year",
+          "omitBlank": false,
+          "type": "list",
+          "columnName": "year"
+        }
+      ]
+    }
+  },
+  {
+    "op": "core/row-removal",
+    "description": "Remove rows",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": [
+        {
+          "omitError": false,
+          "expression": "isBlank(value)",
+          "selectBlank": false,
+          "selection": [
+            {
+              "v": {
+                "v": true,
+                "l": "true"
+              }
+            }
+          ],
+          "selectError": false,
+          "invert": false,
+          "name": "species",
+          "omitBlank": false,
+          "type": "list",
+          "columnName": "species"
+        }
+      ]
+    }
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column locality",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "locality",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wethersfield Cove",
+          "Wethersfield Wethersfield Cove",
+          "Wethersfield cove"
+        ],
+        "to": "Wethersfield Cove"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Hartford",
+          "Hartford.",
+          "HARTFORD"
+        ],
+        "to": "Hartford"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Rt 2 - Glastonbury",
+          "Rt 2 Glastonbury"
+        ],
+        "to": "Rt 2 - Glastonbury"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "South Windsor - Vibert Road",
+          "Vibert Road South windsor"
+        ],
+        "to": "South Windsor - Vibert Road"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Reservoir",
+          "reservoir"
+        ],
+        "to": "Reservoir"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Cabela's",
+          "Cabelas"
+        ],
+        "to": "Cabela's"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "CT River - Wethersfield",
+          "Wethersfield CT River"
+        ],
+        "to": "CT River - Wethersfield"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Cedar Hill",
+          "cedar hill"
+        ],
+        "to": "Cedar Hill"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Podunk Bridge -Strong Rd",
+          "Podunk Bridge - Strong Rd"
+        ],
+        "to": "Podunk Bridge -Strong Rd"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Great River Park E. Hartford",
+          "E. Hartford Great River Park"
+        ],
+        "to": "Great River Park E. Hartford"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Glastonbury - Riverfront Park",
+          "Riverfront Park - Glastonbury"
+        ],
+        "to": "Glastonbury - Riverfront Park"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wickham Park",
+          "wickham park"
+        ],
+        "to": "Wickham Park"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Hockanum River",
+          "hockanum river"
+        ],
+        "to": "Hockanum River"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Sullivan Ave South Windsor",
+          "Sullivan Ave. - South Windsor"
+        ],
+        "to": "Sullivan Ave South Windsor"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Desmond's Pond",
+          "Desmonds Pond"
+        ],
+        "to": "Desmond's Pond"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Route #4 between Unionville and Farmington",
+          "Route 4 between Unionville and Farmington"
+        ],
+        "to": "Route #4 between Unionville and Farmington"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "My House",
+          "my house"
+        ],
+        "to": "My House"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wethersfield",
+          "wethersfield"
+        ],
+        "to": "Wethersfield"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Connecticut River, Hartford",
+          "Connecticut River, Hartford."
+        ],
+        "to": "Connecticut River, Hartford"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Connecticut River",
+          "Connecticut river"
+        ],
+        "to": "Connecticut River"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Elizabeth Park, West Hartford",
+          "West Hartford - Elizabeth Park"
+        ],
+        "to": "Elizabeth Park, West Hartford"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "West Hartford",
+          "West hartford"
+        ],
+        "to": "West Hartford"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Home",
+          "home"
+        ],
+        "to": "Home"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "191 Spencer St - Manchester CT",
+          "191 Spencer St Manchester CT"
+        ],
+        "to": "191 Spencer St - Manchester CT"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "South Windsor. Newberry Road",
+          "South Windsor - Newberry Road"
+        ],
+        "to": "South Windsor. Newberry Road"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Glastonbury Meadows",
+          "Glastonbury meadows"
+        ],
+        "to": "Glastonbury Meadows"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Vibert Rd - South Windsor",
+          "South Windsor Vibert Rd"
+        ],
+        "to": "Vibert Rd - South Windsor"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Great River Park - East Hartford",
+          "East Hartford - Great River Park"
+        ],
+        "to": "Great River Park - East Hartford"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Vibert Rd",
+          "Vibert Rd."
+        ],
+        "to": "Vibert Rd"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Fernridge Park - West Hartford",
+          "West Hartford - Fernridge Park"
+        ],
+        "to": "Fernridge Park - West Hartford"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Newington",
+          "newington"
+        ],
+        "to": "Newington"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "East Hartford CT River",
+          "CT River - East Hartford"
+        ],
+        "to": "East Hartford CT River"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "CBAP Quad:Block 52:4 - Wethersfield, Cove Park",
+          "CBAP Quad:Block 52:4 - Wethersfield, Wethersfield Cove Park"
+        ],
+        "to": "CBAP Quad:Block 52:4 - Wethersfield, Cove Park"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "JoAnn Fabrics field",
+          "JoAnn Fabrics Field"
+        ],
+        "to": "JoAnn Fabrics field"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Point Road - Glastonbury",
+          "Glastonbury - Point Road"
+        ],
+        "to": "Point Road - Glastonbury"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Goodwin Park - Hartford",
+          "Hartford - Goodwin Park"
+        ],
+        "to": "Goodwin Park - Hartford"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "South Windsor - Desmond's Pond",
+          "Desmond's Pond - South Windsor"
+        ],
+        "to": "South Windsor - Desmond's Pond"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Mill on the River",
+          "The Mill on the River"
+        ],
+        "to": "Mill on the River"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Laurel Marsh - Manchester",
+          "Manchester Laurel Marsh"
+        ],
+        "to": "Laurel Marsh - Manchester"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Bushnell Park",
+          "bushnell park"
+        ],
+        "to": "Bushnell Park"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "East Catholic High School",
+          "east catholic high school"
+        ],
+        "to": "East Catholic High School"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Bloomfield",
+          "bloomfield"
+        ],
+        "to": "Bloomfield"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column locality",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "locality",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Hockanum River Linear Trail",
+          "Hockanum  River  LinearTrail"
+        ],
+        "to": "Hockanum River Linear Trail"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "backyard",
+          "Back Yard"
+        ],
+        "to": "backyard"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column locality",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "locality",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Cedar Hill Cemetery (Hartford)",
+          "Cedar Hill Cemetery",
+          "Cedar Hill Cemetary",
+          "Cedar Hill Cemetery - Newington",
+          "Cedar Hill Cemetery - Htfd - Ct"
+        ],
+        "to": "Cedar Hill Cemetery (Hartford)"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Elizabeth Park",
+          "Elizabeth Park, West Hartford",
+          "Elizabeth Park - Hartford",
+          "Elizabeth Park Conservancy - CT"
+        ],
+        "to": "Elizabeth Park, West Hartford"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Riverside Park",
+          "Riverside Park (Hartford)",
+          "Riverside Park Flood Management Pond",
+          "Riverside Park, Connecticut River, Hartford"
+        ],
+        "to": "Riverside Park (Hartford)"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Carmen Arace School",
+          "Carmen Arace School - Bloomfield",
+          "Carman Arace School - Park Ave"
+        ],
+        "to": "Carmen Arace School"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wickham Park",
+          "Whickam Park",
+          "Wickam Park"
+        ],
+        "to": "Wickham Park"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Bloomfield Reservoir 2",
+          "Bloomfield res.#2",
+          "Bloomfield Reservoir 2 - Seabury"
+        ],
+        "to": "Bloomfield Reservoir 2"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "06106 Hartford",
+          "06105 Hartford",
+          "06112 Hartford"
+        ],
+        "to": "Hartford"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Great River Park - East Hartford",
+          "Great River Park",
+          "Great River Park E. Hartford"
+        ],
+        "to": "Great River Park - East Hartford"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "East Catholic High School",
+          "East Catholic High School Manchester"
+        ],
+        "to": "East Catholic High School"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Samuel Wheeler Reed Park",
+          "Samuel Wheeler Reed Park - Bloomfield"
+        ],
+        "to": "Samuel Wheeler Reed Park"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Rt 2 - Glastonbury",
+          "Rte 2 Glastonbury"
+        ],
+        "to": "Rt 2 - Glastonbury"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Cumberland Street",
+          "Cumberland St, Foster Heights"
+        ],
+        "to": "Cumberland St, Foster Heights"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wintergreen Woods - Wethersfield",
+          "Wintergreen Woods, open field"
+        ],
+        "to": "Wintergreen Woods - Wethersfield"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Vibert Boat Landing",
+          "Vibert Boat launch/road"
+        ],
+        "to": "Vibert Boat Landing"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Desmond's Pond",
+          "Desmond's Pond (and surrounding areas)"
+        ],
+        "to": "Desmond's Pond"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Sand bars of Connecticut River",
+          "sand bars of Concord River"
+        ],
+        "to": "Sand bars of Connecticut River"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Old Wethersfield - CT",
+          "Old Wethersfield"
+        ],
+        "to": "Old Wethersfield - CT"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Keeney Cove",
+          "Keney Cove"
+        ],
+        "to": "Keeney Cove"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Bloomfield High School Fields",
+          "Bloomfield High School"
+        ],
+        "to": "Bloomfield High School"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "80 Washington St - Hartford - CT",
+          "80 Washington Street - Hartford"
+        ],
+        "to": "80 Washington Street - Hartford"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "University of Hartford",
+          "University of Hartford, West Hartford"
+        ],
+        "to": "University of Hartford"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Wethersfield",
+          "Weathersfield"
+        ],
+        "to": "Wethersfield"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Laurel Marsh - Manchester - CT",
+          "Laurel Marsh - Manchester"
+        ],
+        "to": "Laurel Marsh - Manchester"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Charter Oak Landing",
+          "Charter Oak Landing - Hartford"
+        ],
+        "to": "Charter Oak Landing - Hartford"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Windsor Meadows State Park",
+          "Windsor Meadows SP"
+        ],
+        "to": "Windsor Meadows State Park"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Mill Pond Park - Newington",
+          "Mill Pond Park"
+        ],
+        "to": "Mill Pond Park - Newington"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "CONNECTICUT: Hartford County; Hartford",
+          "CONNECTICUT: Hartford County; West Hartford"
+        ],
+        "to": "Hartford"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Two Rivers Magnet School",
+          "Two Rivers Magnet Middle School"
+        ],
+        "to": "Two Rivers Magnet School"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "South  Windsor Land Trust Property - Ellington Rd",
+          "South Windsor Land Trust"
+        ],
+        "to": "South Windsor Land Trust"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Vibert Rd",
+          "Vibert Road"
+        ],
+        "to": "Vibert Rd"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "South Windsor Newberry Rd",
+          "South Windsor. Newberry Road"
+        ],
+        "to": "South Windsor Newberry Rd"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column locality",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "locality",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "06033 Glastonbury"
+        ],
+        "to": "Glastonbury"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column locality",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "locality",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "06117 West Hartford"
+        ],
+        "to": "West Hartford"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column locality",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "locality",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "06119 West Hartford"
+        ],
+        "to": "West Hartford"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column locality",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "locality",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "06109 Wethersfield"
+        ],
+        "to": "Wethersfield"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column locality",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "locality",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "06108 East Hartford"
+        ],
+        "to": "East Hartford"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column locality",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "locality",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "06107 West Hartford"
+        ],
+        "to": "West Hartford"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column locality",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "locality",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "06118 East Hartford"
+        ],
+        "to": "East Hartford"
+      }
+    ]
+  }
+]
