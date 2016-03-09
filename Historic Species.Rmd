@@ -43,7 +43,7 @@ A more useful dataset is a list of species (1,575 total), with the number of obs
 Finally, I [subset the list of species](no-obs-in-50yr.csv) to only include those that hadn't been recorded in the last 50 years in this area.  That still left 928 species.  
 
 
-If you'd like to play with this yourself, feel free to download the data.  You can also download this folder and run the [R code](Historic Species.RMD).
+If you'd like to play with this yourself, feel free to download the data.  You can also download this folder and run the [R code](Historic Species.Rmd).
 
 
 ```{r 'Data_wrangling', include=F}
