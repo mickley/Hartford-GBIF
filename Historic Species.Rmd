@@ -126,6 +126,63 @@ write.csv(oldspp, "no-obs-in-50yr.csv")
 
 
 
+# Summarize by family
+families <- species %>%
+     
+     # Group by family
+     group_by(family) %>%
+     
+     # Count the total number of species for each family
+     mutate(total.spp = n()) %>%
+     
+     # Filter for species not seen in 50 years
+     filter(year < 1966) %>%
+     
+     # Group by family again
+     group_by(family) %>%
+     
+     # Summarize 
+     summarize(not.recent.spp = n(), total.spp = mean(total.spp), 
+          percent = round(not.recent.spp/total.spp*100, 2), 
+          total.obs = sum(num.obs)) %>%
+     
+     # Sort by # species not seen in 50 years
+     arrange(desc(not.recent.spp))
+
+
+# Write out the families to CSV file
+write.csv(families, "families.csv")
+
+
+
+# Summarize by locality
+localities <- species %>%
+     
+     # Group by locality
+     group_by(locality) %>%
+     
+     mutate(total.spp = n(), num.obs = sum(num.obs)) %>%
+     
+     #  Filter for species not seen in 50 years & unnamed localities
+     filter(year < 1966 & locality != "") %>%
+     
+     # Group by locality again
+     group_by(locality) %>%
+     
+     # Summarize
+     summarize(not.recent.spp = n(), total.spp = mean(total.spp), 
+           percent = round(not.recent.spp/total.spp*100, 2), 
+           total.obs = mean(num.obs)) %>%
+     
+     # Sort by # species not seen in 50 years
+     arrange(desc(not.recent.spp))
+
+
+# Write out the localities to CSV file
+write.csv(localities, "localities.csv")
+
+
+
 ```
 
 ## Some Quick Graphs
